@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="card mb-3">
+    <div class="card-body">
+      <h4>Fill a form:</h4>
+      <form novalidate (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <input
+              type="text"
+              class="form-control"
+              [ngClass]="{'is-invalid': itemName.errors && itemName.dirty && form.submitted}"
+              #itemName="ngModel"
+              id="name"
+              [(ngModel)]="item.name"
+              name="name"
+              placeholder="Your name"
+              required
+              minlength="2"
+              maxlength="10"
+            >
+            <div class="invalid-feedback" [hidden]="!itemName.errors?.required">Item is required</div>
+            <div class="invalid-feedback" [hidden]="!itemName.errors?.minlength">Item should has at lest 2 characters</div>
+          </div>
+          <div class="form-group col-md-6">
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              [(ngModel)]="item.email"
+              #itemEmail="ngModel"
+              name="email"
+              placeholder="Your email"
+              required
+              email="@"
+            >
+            <div class="invalid-feedback" [hidden]="!itemEmail.errors?.required">Item is required</div>
+            <div class="invalid-feedback" [hidden]="!itemEmail.errors?.email">Email address is invalid</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <input type="number" class="form-control" id="age" [(ngModel)]="item.age" name="age" placeholder="How old are you?" required>
+          </div>
+          <div class="form-group col-md-6">
+            <input type="number" class="form-control" id="phone" [(ngModel)]="item.phone" name="phone" placeholder="Your phone number" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea type="text" class="form-control" id="comment" [(ngModel)]="item.comment" name="comment" placeholder="Comment" required></textarea>
+        </div>
+        <!--<div class="form-group">-->
+          <!--<label for="count">Count</label>-->
+          <!--<input type="number" class="form-control" id="count" [(ngModel)]="item.count" name="count">-->
+        <!--</div>-->
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+    </div>
+    <!--<div class="alert alert-info mb-3">Item name: {{ item.name || 'n/a' }}, item count: {{ item.email || "n/a" }}</div>-->
+  </div>
+  <table class="table table-striped mb-3" >
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Age</th>
+        <th scope="col">Phone#</th>
+        <th scope="col">Comments</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let item of shoppingList, let i = index">
+      <tr >
+        <td >{{ item.id }}</td>
+        <td >{{ item.name }}</td>
+        <td >{{ item.email }}</td>
+        <td >{{ item.age }}</td>
+        <td >{{ item.phone }}</td>
+        <td >{{ item.comment }}</td>
+        <td ><a href="#" (click)="deleteItem(item.id)">Delete</a></td>
+      </tr>
+      </tbody>
+    </table>
+
+  <!--<ul class="list-group">-->
+    <!--<li class="list-group-item list-group-item-action" *ngFor="let item of shoppingList">{{ item.name }}</li>-->
+  <!--</ul>-->
+</div>
