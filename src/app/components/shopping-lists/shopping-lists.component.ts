@@ -10,10 +10,9 @@ import {FormGroup, NgForm} from '@angular/forms';
 
 export class ShoppingListsComponent implements OnInit {
   item: ShoppingListItem = {
+    id: 0,
     name: '',
     email: '',
-    age: 0,
-    phone: 0,
     comment: ''
   };
   shoppingList: ShoppingListItem[];
@@ -26,7 +25,7 @@ export class ShoppingListsComponent implements OnInit {
   }
 
   onSubmit(form) {
-    // if (form.invalid) return;
+    if (form.invalid) return;
 
     const newItem: ShoppingListItem = {
       id: this.shoppingList.length,
@@ -38,7 +37,6 @@ export class ShoppingListsComponent implements OnInit {
     };
     this.shoppingList.push(newItem);
     this.form.resetForm();
-    // form.reset();
   }
 
   deleteItem(id) {
